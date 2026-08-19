@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
+    <link rel="apple-touch-icon" href="%BASE_URL%favicon.svg" />
+    <meta name="theme-color" content="#121417" />
+    <title>Coliseum Concrete & Interlock | Ottawa's Concrete & Hardscape Craftsmen</title>
+    <meta name="description" content="Ottawa's licensed concrete and interlock contractor. Specializing in stamped concrete patios, concrete driveways, interlock walkways, and architectural hardscapes." />
+    <meta property="og:title" content="Coliseum Concrete & Interlock | Ottawa Concrete Contractor" />
+    <meta property="og:description" content="Premium concrete, stamped concrete, and interlock craftsmanship for Ottawa homes." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+      (function () {
+        try {
+          var stored = JSON.parse(localStorage.getItem('coliseum-theme') || 'null');
+          if (!stored) return;
+          var root = document.documentElement.style;
+          if (stored.accent) {
+            root.setProperty('--accent', stored.accent);
+            root.setProperty('--accent-hover', stored.hover);
+            root.setProperty('--accent-active', stored.active);
+            root.setProperty('--accent-fg', stored.fg);
+          }
+          if (stored.canvas) {
+            root.setProperty('--canvas', stored.canvas);
+            root.setProperty('--canvas-deep', stored.canvasDeep);
+            root.setProperty('--raised', stored.raised);
+            root.setProperty('--surface', stored.surface);
+            root.setProperty('--elevated', stored.elevated);
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body class="bg-canvas text-[#F3F4F6] antialiased selection:bg-accent selection:text-accent-fg font-sans">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
