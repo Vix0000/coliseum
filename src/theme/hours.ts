@@ -114,6 +114,27 @@ function dayRangeLabel(start: number, end: number, short: boolean): string {
   return `${left} – ${right}`;
 }
 
+export function formatHoursChips(hours: HoursInfo): { label: string; time: string }[] {
+  const groups: { start: number; end: number; day: DayHours }[] = [];
+
+  WEEKDAYS.forEach((weekday, index) => {
+    const current = hours.days[weekday.id];
+    const last = groups[groups.length - 1];
+    if (last && sameDayHours(last.day, current)) {
+      last.end = index;
+      return;
+    }
+    groups.push({ start: index, end: index, day: current });
+  });
+
+  return groups.map((group) => ({
+    label: dayRangeLabel(group.start, group.end, false),
+    time: group.day.closed
+      ? 'Closed'
+      : `${formatTime12(group.day.open)} – ${formatTime12(group.day.close)}`,
+  }));
+}
+
 export function formatHoursDisplay(hours: HoursInfo): string {
   const groups: { start: number; end: number; day: DayHours }[] = [];
 

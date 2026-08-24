@@ -4,12 +4,13 @@ import { Footer } from './components/Footer';
 import { MobileStickyCTA } from './components/MobileStickyCTA';
 import { PhoneCallProvider } from './components/PhoneCallContext';
 import { EmailProvider } from './components/EmailContext';
-import { ThemeProvider } from './components/ThemeContext';
+import { ThemeProvider, useTheme } from './components/ThemeContext';
 import { AnnouncementProvider } from './components/AnnouncementContext';
 import { AnnouncementBanner } from './components/AnnouncementBanner';
 import { AdminPanel } from './components/AdminPanel';
 import { ProjectLightbox } from './components/ProjectLightbox';
 import { HomePage } from './pages/HomePage';
+import { HomePageV2 } from './pages/HomePageV2';
 import { ServicesPage } from './pages/ServicesPage';
 import { ServiceDetailPage } from './pages/ServiceDetailPage';
 import { ProjectsPage } from './pages/ProjectsPage';
@@ -25,6 +26,21 @@ import { pathFromLocation, withBase } from './lib/basePath';
 import { ProjectItem } from './types';
 
 export default function App() {
+  return (
+    <ThemeProvider>
+      <AnnouncementProvider>
+        <PhoneCallProvider>
+          <EmailProvider>
+            <AppShell />
+          </EmailProvider>
+        </PhoneCallProvider>
+      </AnnouncementProvider>
+    </ThemeProvider>
+  );
+}
+
+function AppShell() {
+  const { homeVersion } = useTheme();
   const [currentPath, setCurrentPath] = useState<string>(() => {
     return normalizePath(pathFromLocation());
   });
@@ -60,6 +76,12 @@ export default function App() {
     }
   }, [currentPath]);
 
+  useEffect(() => {
+    if (currentPath === '/') {
+      window.scrollTo({ top: 0 });
+    }
+  }, [homeVersion]);
+
   const startQuote = (serviceName: string) => {
     setQuoteInitialService(serviceName);
     navigate('/quote');
@@ -67,10 +89,10 @@ export default function App() {
 
   const renderCurrentPage = () => {
     if (currentPath === '/') {
-      return (
-        <HomePage
-          onNavigate={navigate}
-        />
+      return homeVersion === 'v2' ? (
+        <HomePageV2 onNavigate={navigate} />
+      ) : (
+        <HomePage onNavigate={navigate} />
       );
     }
 
@@ -132,38 +154,30 @@ export default function App() {
   };
 
   return (
-    <ThemeProvider>
-      <AnnouncementProvider>
-        <PhoneCallProvider>
-          <EmailProvider>
-            <div className="min-h-screen flex flex-col bg-canvas text-stone-100 font-sans">
-              <div id="site-chrome" className="fixed top-0 right-0 left-0 z-50">
-                <AnnouncementBanner onNavigate={navigate} />
-                <Header currentPath={currentPath} onNavigate={navigate} />
-              </div>
+    <div className="min-h-screen flex flex-col bg-canvas text-stone-100 font-sans">
+      <div id="site-chrome" className="fixed top-0 right-0 left-0 z-50">
+        <AnnouncementBanner onNavigate={navigate} />
+        <Header currentPath={currentPath} onNavigate={navigate} />
+      </div>
 
-              <main id="site-main" className="flex-grow">
-                {renderCurrentPage()}
-              </main>
+      <main id="site-main" className="flex-grow">
+        {renderCurrentPage()}
+      </main>
 
-              <Footer onNavigate={navigate} />
+      <Footer onNavigate={navigate} />
 
-              <MobileStickyCTA currentPath={currentPath} onNavigate={navigate} />
-              <AdminPanel currentPath={currentPath} />
+      <MobileStickyCTA currentPath={currentPath} onNavigate={navigate} />
+      <AdminPanel currentPath={currentPath} />
 
-              {lightboxProject && (
-                <ProjectLightbox
-                  project={lightboxProject}
-                  onClose={() => setLightboxProject(null)}
-                  onRequestQuote={(project) => {
-                    startQuote(project.serviceType);
-                  }}
-                />
-              )}
-            </div>
-          </EmailProvider>
-        </PhoneCallProvider>
-      </AnnouncementProvider>
-    </ThemeProvider>
+      {lightboxProject && (
+        <ProjectLightbox
+          project={lightboxProject}
+          onClose={() => setLightboxProject(null)}
+          onRequestQuote={(project) => {
+            startQuote(project.serviceType);
+          }}
+        />
+      )}
+    </div>
   );
 }

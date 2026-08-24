@@ -34,12 +34,14 @@ import {
   parseStoredHours,
   type HoursInfo,
 } from '../theme/hours';
+import { DEFAULT_HOME_VERSION, parseHomeVersion, type HomeVersion } from '../theme/home';
 
 interface ThemeState {
   palette: AccentPalette;
   background: BackgroundPalette;
   contact: ContactInfo;
   hours: HoursInfo;
+  homeVersion: HomeVersion;
 }
 
 interface ThemeContextValue extends ThemeState {
@@ -48,6 +50,7 @@ interface ThemeContextValue extends ThemeState {
   setPhone: (raw: string) => void;
   setEmail: (raw: string) => void;
   setHours: (hours: HoursInfo) => void;
+  setHomeVersion: (version: HomeVersion) => void;
   resetTheme: () => void;
 }
 
@@ -79,7 +82,8 @@ function persistTheme(
   palette: AccentPalette,
   background: BackgroundPalette,
   contact: ContactInfo,
-  hours: HoursInfo
+  hours: HoursInfo,
+  homeVersion: HomeVersion
 ) {
   const current = readStoredRaw();
   localStorage.setItem(
@@ -96,6 +100,7 @@ function persistTheme(
       phone: contact.phone,
       email: contact.email,
       hours,
+      homeVersion,
     })
   );
 }
@@ -107,6 +112,7 @@ const initialTheme = (): ThemeState => {
       background: DEFAULT_BACKGROUND,
       contact: DEFAULT_CONTACT,
       hours: DEFAULT_HOURS,
+      homeVersion: DEFAULT_HOME_VERSION,
     };
   }
   const stored = readStoredRaw();
@@ -114,19 +120,20 @@ const initialTheme = (): ThemeState => {
   const background = readStoredBackground() ?? DEFAULT_BACKGROUND;
   const contact = readStoredContact() ?? DEFAULT_CONTACT;
   const hours = parseStoredHours(stored.hours) ?? DEFAULT_HOURS;
+  const homeVersion = parseHomeVersion(stored.homeVersion);
   applyAccentPalette(palette);
   applyBackgroundPalette(background);
-  return { palette, background, contact, hours };
+  return { palette, background, contact, hours, homeVersion };
 };
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [{ palette, background, contact, hours }, setTheme] = useState(initialTheme);
+  const [{ palette, background, contact, hours, homeVersion }, setTheme] = useState(initialTheme);
 
   const setAccent = useCallback((hex: string) => {
     const nextPalette = deriveAccentPalette(hex);
     applyAccentPalette(nextPalette);
     setTheme((current) => {
-      persistTheme(nextPalette, current.background, current.contact, current.hours);
+      persistTheme(nextPalette, current.background, current.contact, current.hours, current.homeVersion);
       return { ...current, palette: nextPalette };
     });
   }, []);
@@ -135,7 +142,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const nextBackground = deriveBackgroundPalette(id);
     applyBackgroundPalette(nextBackground);
     setTheme((current) => {
-      persistTheme(current.palette, nextBackground, current.contact, current.hours);
+      persistTheme(current.palette, nextBackground, current.contact, current.hours, current.homeVersion);
       return { ...current, background: nextBackground };
     });
   }, []);
@@ -144,7 +151,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const parsed = parsePhone(raw);
     setTheme((current) => {
       const nextContact = { ...current.contact, ...parsed };
-      persistTheme(current.palette, current.background, nextContact, current.hours);
+      persistTheme(current.palette, current.background, nextContact, current.hours, current.homeVersion);
       return { ...current, contact: nextContact };
     });
   }, []);
@@ -153,15 +160,22 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const parsed = parseEmail(raw);
     setTheme((current) => {
       const nextContact = { ...current.contact, ...parsed };
-      persistTheme(current.palette, current.background, nextContact, current.hours);
+      persistTheme(current.palette, current.background, nextContact, current.hours, current.homeVersion);
       return { ...current, contact: nextContact };
     });
   }, []);
 
   const setHours = useCallback((nextHours: HoursInfo) => {
     setTheme((current) => {
-      persistTheme(current.palette, current.background, current.contact, nextHours);
+      persistTheme(current.palette, current.background, current.contact, nextHours, current.homeVersion);
       return { ...current, hours: nextHours };
+    });
+  }, []);
+
+  const setHomeVersion = useCallback((nextVersion: HomeVersion) => {
+    setTheme((current) => {
+      persistTheme(current.palette, current.background, current.contact, current.hours, nextVersion);
+      return { ...current, homeVersion: nextVersion };
     });
   }, []);
 
@@ -174,6 +188,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       background: DEFAULT_BACKGROUND,
       contact: DEFAULT_CONTACT,
       hours: DEFAULT_HOURS,
+      homeVersion: DEFAULT_HOME_VERSION,
     });
   }, []);
 
@@ -183,11 +198,13 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       background,
       contact,
       hours,
+      homeVersion,
       setAccent,
       setBackground,
       setPhone,
       setEmail,
       setHours,
+      setHomeVersion,
       resetTheme,
     }),
     [
@@ -195,11 +212,13 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       background,
       contact,
       hours,
+      homeVersion,
       setAccent,
       setBackground,
       setPhone,
       setEmail,
       setHours,
+      setHomeVersion,
       resetTheme,
     ]
   );
@@ -233,3 +252,4 @@ export const useCompany = () => {
 };
 
 export { ACCENT_PRESETS, BACKGROUND_PRESETS, DEFAULT_BACKGROUND_ID, isDefaultContact, isDefaultHours };
+export type { HomeVersion };
