@@ -147,7 +147,7 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
     'w-full bg-[#F2F2F2] px-4 py-3 text-black outline-none placeholder:text-gray-500';
 
   return (
-    <div id="home-v2-page" className="overflow-x-hidden bg-canvas">
+    <div id="home-v2-page" className="bg-canvas">
       <SeoHead
         title="Coliseum Concrete & Interlock | Ottawa's Concrete & Hardscape Contractor"
         description="Premium concrete, stamped concrete, and interlock craftsmanship for Ottawa homes. Licensed contractor specializing in driveways, patios, and stairs."
@@ -220,7 +220,7 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
                     </div>
                   </div>
 
-                  <div className="absolute top-16 right-0 hidden items-center gap-2 md:top-1/2 md:right-8 md:flex md:-translate-y-1/2">
+                  <div className="absolute top-16 right-16 hidden items-center gap-2 md:top-1/2 md:right-16 md:flex md:-translate-y-1/2">
                     <button
                       type="button"
                       aria-label={muted ? 'Unmute' : 'Mute'}
