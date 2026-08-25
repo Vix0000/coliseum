@@ -161,7 +161,7 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
     'w-full bg-[#F2F2F2] px-4 py-3 text-base text-black outline-none placeholder:text-gray-500';
 
   return (
-    <div id="home-v2-page" className="bg-canvas pb-[5.5rem] lg:pb-0">
+    <div id="home-v2-page" className="overflow-x-hidden bg-canvas">
       <SeoHead
         title="Coliseum Concrete & Interlock | Ottawa's Concrete & Hardscape Contractor"
         description="Premium concrete, stamped concrete, and interlock craftsmanship for Ottawa homes. Licensed contractor specializing in driveways, patios, and stairs."
@@ -205,17 +205,17 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
                   type="button"
                   aria-label={muted ? 'Unmute' : 'Mute'}
                   onClick={() => setMuted((current) => !current)}
-                  className="flex h-9 w-9 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-black/70 sm:h-10 sm:w-10"
+                  className="flex h-11 w-11 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-black/70 sm:h-10 sm:w-10"
                 >
-                  {muted ? <VolumeX className="h-4 w-4 sm:h-5 sm:w-5" /> : <Volume2 className="h-4 w-4 sm:h-5 sm:w-5" />}
+                  {muted ? <VolumeX className="h-5 w-5 sm:h-5 sm:w-5" /> : <Volume2 className="h-5 w-5 sm:h-5 sm:w-5" />}
                 </button>
                 <button
                   type="button"
                   aria-label={playing ? 'Pause' : 'Play'}
                   onClick={() => setPlaying((current) => !current)}
-                  className="flex h-9 w-9 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-black/70 sm:h-10 sm:w-10"
+                  className="flex h-11 w-11 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-black/70 sm:h-10 sm:w-10"
                 >
-                  {playing ? <Pause className="h-4 w-4 sm:h-5 sm:w-5" /> : <Play className="h-4 w-4 sm:h-5 sm:w-5" />}
+                  {playing ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
                 </button>
               </div>
 
@@ -242,7 +242,13 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
             <div className="relative z-20 w-full bg-black md:absolute md:inset-0 md:bg-transparent md:pointer-events-none">
               <div className="relative flex h-full flex-col items-center justify-between">
                 <div className="hidden flex-1 md:block" />
-                <div className="pointer-events-auto relative w-full px-4 py-3 pb-[calc(5.25rem+env(safe-area-inset-bottom))] sm:px-8 sm:pt-8 lg:pb-8">
+                <div
+                  className={`pointer-events-auto relative w-full px-4 py-3 pb-[calc(5.25rem+env(safe-area-inset-bottom))] transition-opacity duration-500 sm:px-8 sm:pt-8 lg:pb-8 ${
+                    showScrollHint
+                      ? 'opacity-100'
+                      : 'pointer-events-none opacity-0 md:pointer-events-auto md:opacity-100'
+                  }`}
+                >
                   <div className="mx-auto flex max-w-7xl flex-col items-center gap-3 lg:flex-row lg:flex-wrap lg:items-end lg:justify-between lg:gap-x-8 lg:gap-y-4">
                     <div className="flex flex-col items-center gap-2 text-center lg:flex-row lg:flex-wrap lg:gap-x-6 lg:gap-y-2 lg:text-left">
                       <div className="flex max-w-[20rem] items-start gap-2 text-[11px] leading-snug text-white sm:max-w-none sm:items-center sm:text-xs">
@@ -252,13 +258,13 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
                       <button
                         type="button"
                         onClick={openPhoneModal}
-                        className="border-2 border-white px-2 py-0.5 text-xs text-white transition-all duration-300 hover:border-accent hover:bg-accent hover:text-accent-fg"
+                        className="min-h-11 border-2 border-white px-3 py-2 text-xs text-white transition-all duration-300 hover:border-accent hover:bg-accent hover:text-accent-fg"
                       >
                         {COMPANY_INFO.phone}
                       </button>
                     </div>
 
-                    <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 md:gap-4">
+                    <div className="flex w-full flex-col items-center gap-1.5 sm:w-auto sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-3 sm:gap-y-1.5 md:gap-4">
                       {hourChips.map((chip) => (
                         <div key={chip.label} className="flex items-center gap-2">
                           <span className="border-2 border-white px-1.5 py-0.5 text-[11px] text-white sm:text-xs">
@@ -717,13 +723,13 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
                         />
                       </div>
                       <div className="flex items-center">
-                        <label className="flex cursor-pointer items-start gap-3">
+                        <label className="flex min-h-11 cursor-pointer items-start gap-3">
                           <input
                             type="checkbox"
                             required
                             checked={form.consent}
                             onChange={(event) => setForm({ ...form, consent: event.target.checked })}
-                            className="mt-1 h-4 w-4 accent-[var(--accent)]"
+                            className="mt-1 h-5 w-5 shrink-0 accent-[var(--accent)]"
                           />
                           <span className="text-sm text-stone-400">
                             By submitting this form, I accept that the information entered will be
@@ -735,7 +741,7 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
                     <div className="flex justify-start pt-4">
                       <button
                         type="submit"
-                        className="bg-[#F2F2F2] px-8 py-3 font-medium text-black transition-colors hover:bg-white"
+                        className="min-h-11 w-full bg-[#F2F2F2] px-8 py-3 font-medium text-black transition-colors hover:bg-white sm:w-auto"
                       >
                         Send
                       </button>

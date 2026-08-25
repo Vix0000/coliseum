@@ -106,7 +106,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate }) => {
   return (
     <header
       id="main-header"
-      className={`py-5 transition-[background-color,box-shadow] duration-300 ${
+      className={`py-3 transition-[background-color,box-shadow] duration-300 sm:py-5 ${
         isScrolled || mobileMenuMounted
           ? 'bg-canvas border-b border-white/10 shadow-2xl'
           : 'bg-gradient-to-b from-canvas/90 via-canvas/50 to-transparent border-b-0'

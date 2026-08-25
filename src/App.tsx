@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
-import { MobileStickyCTA } from './components/MobileStickyCTA';
+import { MobileStickyCTA, showsMobileStickyCta } from './components/MobileStickyCTA';
 import { PhoneCallProvider } from './components/PhoneCallContext';
 import { EmailProvider } from './components/EmailContext';
 import { ThemeProvider, useTheme } from './components/ThemeContext';
@@ -164,7 +164,10 @@ function AppShell() {
         {renderCurrentPage()}
       </main>
 
-      <Footer onNavigate={navigate} />
+      <Footer
+        onNavigate={navigate}
+        padForStickyCta={showsMobileStickyCta(currentPath, homeVersion)}
+      />
 
       <MobileStickyCTA currentPath={currentPath} onNavigate={navigate} />
       <AdminPanel currentPath={currentPath} />

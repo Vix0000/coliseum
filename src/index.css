@@ -42,6 +42,8 @@
     font-family: var(--font-sans);
     background-color: var(--canvas);
     color: #f3f4f6;
+    overflow-x: hidden;
+    overscroll-behavior-x: none;
   }
 
   /* Slightly open up captions, labels, and other small type */
@@ -60,6 +62,7 @@
   summary,
   label[for] {
     cursor: pointer;
+    touch-action: manipulation;
   }
 
   button:disabled,

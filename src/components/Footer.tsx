@@ -7,14 +7,20 @@ import { useEmail } from './EmailContext';
 
 interface FooterProps {
   onNavigate: (path: string) => void;
+  padForStickyCta?: boolean;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
+export const Footer: React.FC<FooterProps> = ({ onNavigate, padForStickyCta = false }) => {
   const COMPANY_INFO = useCompany();
   const { openPhoneModal } = usePhoneCall();
   const { openEmailModal } = useEmail();
   return (
-    <footer id="main-footer" className="bg-canvas-deep border-t border-white/10 text-stone-300">
+    <footer
+      id="main-footer"
+      className={`bg-canvas-deep border-t border-white/10 text-stone-300 ${
+        padForStickyCta ? 'pb-[5.5rem] lg:pb-0' : ''
+      }`}
+    >
       
       {/* Main Footer Directory */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-16">
