@@ -1,19 +1,25 @@
 import React from 'react';
 import { Phone, FileText } from 'lucide-react';
 import { usePhoneCall } from './PhoneCallContext';
+import { useTheme } from './ThemeContext';
+import type { HomeVersion } from '../theme/home';
 
 interface MobileStickyCTAProps {
   onNavigate: (path: string) => void;
   currentPath: string;
 }
 
-export const showsMobileStickyCta = (currentPath: string) =>
-  currentPath !== '/' && currentPath !== '/quote';
+export const showsMobileStickyCta = (currentPath: string, homeVersion: HomeVersion = 'v1') => {
+  if (currentPath === '/quote') return false;
+  if (currentPath === '/') return homeVersion === 'v2';
+  return true;
+};
 
 export const MobileStickyCTA: React.FC<MobileStickyCTAProps> = ({ onNavigate, currentPath }) => {
   const { openPhoneModal } = usePhoneCall();
+  const { homeVersion } = useTheme();
 
-  if (!showsMobileStickyCta(currentPath)) return null;
+  if (!showsMobileStickyCta(currentPath, homeVersion)) return null;
 
   return (
     <div

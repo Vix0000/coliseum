@@ -160,7 +160,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ currentPath }) => {
     isDefaultHours(hours) &&
     homeVersion === 'v1';
 
-  const liftAboveStickyCta = showsMobileStickyCta(currentPath);
+  const liftAboveStickyCta = showsMobileStickyCta(currentPath, homeVersion);
 
   return (
     <>
@@ -189,7 +189,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ currentPath }) => {
           role="dialog"
           aria-modal="true"
           aria-labelledby="admin-panel-title"
-          className={`absolute bottom-14 right-0 z-[61] w-[calc(100vw-2rem)] origin-bottom-right rounded-2xl border-2 border-white/20 bg-raised p-4 shadow-2xl transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none lg:w-[min(22rem,calc(100vw-2rem))] ${
+          className={`absolute bottom-14 right-0 z-[61] w-[calc(100vw-2rem)] max-h-[min(34rem,calc(100dvh-7rem))] origin-bottom-right overflow-y-auto rounded-2xl border-2 border-white/20 bg-raised p-4 shadow-2xl transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none lg:w-[min(22rem,calc(100vw-2rem))] ${
             entered
               ? 'translate-y-0 scale-100 opacity-100'
               : 'translate-y-2 scale-[0.97] opacity-0'

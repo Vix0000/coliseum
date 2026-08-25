@@ -166,5 +166,11 @@ body.mobile-nav-open #admin-panel-root {
 }
 
 .v2-gold-offset {
-  box-shadow: 15px -15px 0 0 color-mix(in srgb, var(--accent) 45%, #000);
+  box-shadow: 8px -8px 0 0 color-mix(in srgb, var(--accent) 45%, #000);
+}
+
+@media (min-width: 768px) {
+  .v2-gold-offset {
+    box-shadow: 15px -15px 0 0 color-mix(in srgb, var(--accent) 45%, #000);
+  }
 }

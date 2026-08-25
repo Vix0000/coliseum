@@ -70,15 +70,17 @@ const REQUEST_OPTIONS = [
 ];
 
 const AccentGlyph: React.FC<{ icon: React.ElementType; label: string }> = ({ icon: Icon, label }) => (
-  <div className="flex items-center gap-4">
+  <div className="flex items-center gap-3 sm:gap-4">
     <div className="flex flex-col items-center">
-      <div className="h-6 w-0.5 bg-accent" />
-      <div className="my-1 border border-accent bg-accent p-2 text-accent-fg">
-        <Icon className="h-8 w-8" />
+      <div className="h-5 w-0.5 bg-accent sm:h-6" />
+      <div className="my-1 border border-accent bg-accent p-1.5 text-accent-fg sm:p-2">
+        <Icon className="h-6 w-6 sm:h-8 sm:w-8" />
       </div>
-      <div className="h-6 w-0.5 bg-accent" />
+      <div className="h-5 w-0.5 bg-accent sm:h-6" />
     </div>
-    <span className="font-display text-xl font-semibold tracking-wide text-white">{label}</span>
+    <span className="font-display text-lg font-semibold tracking-wide text-white sm:text-xl">
+      {label}
+    </span>
   </div>
 );
 
@@ -91,6 +93,7 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
   const [playing, setPlaying] = useState(true);
   const [showScrollHint, setShowScrollHint] = useState(true);
   const [testimonialPage, setTestimonialPage] = useState(0);
+  const [testimonialsPerPage, setTestimonialsPerPage] = useState(1);
   const [formSuccess, setFormSuccess] = useState(false);
   const [formError, setFormError] = useState('');
   const [form, setForm] = useState({
@@ -105,11 +108,11 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
   const hourChips = useMemo(() => formatHoursChips(hours), [hours]);
   const testimonialPages = useMemo(() => {
     const pages: (typeof TESTIMONIALS)[] = [];
-    for (let i = 0; i < TESTIMONIALS.length; i += 2) {
-      pages.push(TESTIMONIALS.slice(i, i + 2));
+    for (let i = 0; i < TESTIMONIALS.length; i += testimonialsPerPage) {
+      pages.push(TESTIMONIALS.slice(i, i + testimonialsPerPage));
     }
     return pages;
-  }, []);
+  }, [testimonialsPerPage]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -129,6 +132,17 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    const media = window.matchMedia('(min-width: 1024px)');
+    const apply = () => {
+      setTestimonialsPerPage(media.matches ? 2 : 1);
+      setTestimonialPage(0);
+    };
+    apply();
+    media.addEventListener('change', apply);
+    return () => media.removeEventListener('change', apply);
+  }, []);
+
   const scrollToCarousel = () => {
     document.getElementById('home-v2-services-carousel')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -144,10 +158,10 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
   };
 
   const inputClass =
-    'w-full bg-[#F2F2F2] px-4 py-3 text-black outline-none placeholder:text-gray-500';
+    'w-full bg-[#F2F2F2] px-4 py-3 text-base text-black outline-none placeholder:text-gray-500';
 
   return (
-    <div id="home-v2-page" className="bg-canvas">
+    <div id="home-v2-page" className="bg-canvas pb-[5.5rem] lg:pb-0">
       <SeoHead
         title="Coliseum Concrete & Interlock | Ottawa's Concrete & Hardscape Contractor"
         description="Premium concrete, stamped concrete, and interlock craftsmanship for Ottawa homes. Licensed contractor specializing in driveways, patios, and stairs."
@@ -155,12 +169,12 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
       />
 
       <div className="relative">
-        <div className="sticky top-0 z-0 h-screen overflow-hidden">
+        <div className="sticky top-0 z-0 h-[100dvh] overflow-hidden">
           <section
             id="home-v2-hero"
-            className="relative flex h-dvh w-full flex-col overflow-hidden bg-black md:block"
+            className="relative flex h-[100dvh] w-full flex-col overflow-hidden bg-black md:block"
           >
-            <div className="relative w-full flex-1 overflow-hidden md:absolute md:inset-0 md:h-full">
+            <div className="relative min-h-0 w-full flex-1 overflow-hidden md:absolute md:inset-0 md:h-full">
               <video
                 ref={videoRef}
                 id="home-v2-hero-video"
@@ -175,7 +189,7 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
               </video>
               <div
                 className="pointer-events-none absolute inset-0 z-[1] md:hidden"
-                style={{ background: 'linear-gradient(to bottom, transparent 60%, rgba(0,0,0,1) 100%)' }}
+                style={{ background: 'linear-gradient(to bottom, transparent 55%, rgba(0,0,0,1) 100%)' }}
               />
               <div
                 className="absolute inset-0"
@@ -185,16 +199,54 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
                 }}
               />
               <div className="absolute inset-0 bg-canvas/30" />
+
+              <div className="absolute right-3 bottom-3 z-10 flex items-center gap-2 md:right-20 md:bottom-8">
+                <button
+                  type="button"
+                  aria-label={muted ? 'Unmute' : 'Mute'}
+                  onClick={() => setMuted((current) => !current)}
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-black/70 sm:h-10 sm:w-10"
+                >
+                  {muted ? <VolumeX className="h-4 w-4 sm:h-5 sm:w-5" /> : <Volume2 className="h-4 w-4 sm:h-5 sm:w-5" />}
+                </button>
+                <button
+                  type="button"
+                  aria-label={playing ? 'Pause' : 'Play'}
+                  onClick={() => setPlaying((current) => !current)}
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-black/70 sm:h-10 sm:w-10"
+                >
+                  {playing ? <Pause className="h-4 w-4 sm:h-5 sm:w-5" /> : <Play className="h-4 w-4 sm:h-5 sm:w-5" />}
+                </button>
+              </div>
+
+              <button
+                type="button"
+                aria-label="Scroll down"
+                onClick={scrollToCarousel}
+                className={`absolute bottom-3 left-3 z-10 flex flex-col items-center gap-2 bg-transparent p-0 transition-all duration-500 hover:opacity-80 md:fixed md:bottom-8 md:left-3 ${
+                  showScrollHint ? 'opacity-100 translate-y-0' : 'pointer-events-none opacity-0 translate-y-2'
+                }`}
+              >
+                <span
+                  className="text-[10px] font-medium tracking-[0.3em] text-white/70 uppercase"
+                  style={{ writingMode: 'vertical-rl' }}
+                >
+                  Scroll Down
+                </span>
+                <div className="relative h-8 w-px overflow-hidden bg-accent/40 sm:h-10">
+                  <div className="absolute top-0 left-0 h-full w-full animate-scroll-line bg-accent" />
+                </div>
+              </button>
             </div>
 
             <div className="relative z-20 w-full bg-black md:absolute md:inset-0 md:bg-transparent md:pointer-events-none">
               <div className="relative flex h-full flex-col items-center justify-between">
                 <div className="hidden flex-1 md:block" />
-                <div className="pointer-events-auto relative w-full px-8 py-4 pb-6 sm:py-8">
-                  <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 lg:flex-row lg:flex-wrap lg:items-end lg:justify-between lg:gap-x-8 lg:gap-y-4">
-                    <div className="flex flex-col items-center gap-2 lg:flex-row lg:flex-wrap lg:gap-x-6 lg:gap-y-2">
-                      <div className="flex items-center gap-2 text-xs text-white">
-                        <MapPin className="h-3 w-3 shrink-0" />
+                <div className="pointer-events-auto relative w-full px-4 py-3 pb-[calc(5.25rem+env(safe-area-inset-bottom))] sm:px-8 sm:pt-8 lg:pb-8">
+                  <div className="mx-auto flex max-w-7xl flex-col items-center gap-3 lg:flex-row lg:flex-wrap lg:items-end lg:justify-between lg:gap-x-8 lg:gap-y-4">
+                    <div className="flex flex-col items-center gap-2 text-center lg:flex-row lg:flex-wrap lg:gap-x-6 lg:gap-y-2 lg:text-left">
+                      <div className="flex max-w-[20rem] items-start gap-2 text-[11px] leading-snug text-white sm:max-w-none sm:items-center sm:text-xs">
+                        <MapPin className="mt-0.5 h-3 w-3 shrink-0 sm:mt-0" />
                         <span>{COMPANY_INFO.fullAddress}</span>
                       </div>
                       <button
@@ -206,58 +258,18 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
                       </button>
                     </div>
 
-                    <div className="flex flex-col items-end gap-3 2xl:flex-row 2xl:items-center">
-                      <div className="flex flex-col items-center gap-2 md:flex-row md:gap-4">
-                        {hourChips.map((chip) => (
-                          <div key={chip.label} className="flex items-center gap-2">
-                            <span className="border-2 border-white px-1.5 py-0.5 text-xs text-white">
-                              {chip.label}
-                            </span>
-                            <span className="text-xs text-white">{chip.time}</span>
-                          </div>
-                        ))}
-                      </div>
+                    <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 md:gap-4">
+                      {hourChips.map((chip) => (
+                        <div key={chip.label} className="flex items-center gap-2">
+                          <span className="border-2 border-white px-1.5 py-0.5 text-[11px] text-white sm:text-xs">
+                            {chip.label}
+                          </span>
+                          <span className="text-[11px] text-white sm:text-xs">{chip.time}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
-
-                  <div className="absolute top-16 right-16 hidden items-center gap-2 md:top-1/2 md:right-16 md:flex md:-translate-y-1/2">
-                    <button
-                      type="button"
-                      aria-label={muted ? 'Unmute' : 'Mute'}
-                      onClick={() => setMuted((current) => !current)}
-                      className="flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-black/70"
-                    >
-                      {muted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
-                    </button>
-                    <button
-                      type="button"
-                      aria-label={playing ? 'Pause' : 'Play'}
-                      onClick={() => setPlaying((current) => !current)}
-                      className="flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-black/70"
-                    >
-                      {playing ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
-                    </button>
-                  </div>
                 </div>
-
-                <button
-                  type="button"
-                  aria-label="Scroll down"
-                  onClick={scrollToCarousel}
-                  className={`absolute top-4 left-4 z-50 flex flex-col items-center gap-2 bg-transparent p-0 transition-all duration-500 hover:opacity-80 md:fixed md:top-auto md:bottom-8 md:left-3 ${
-                    showScrollHint ? 'opacity-100 translate-y-0' : 'pointer-events-none opacity-0 translate-y-2'
-                  }`}
-                >
-                  <span
-                    className="text-[10px] font-medium tracking-[0.3em] text-white/60 uppercase"
-                    style={{ writingMode: 'vertical-rl' }}
-                  >
-                    Scroll Down
-                  </span>
-                  <div className="relative h-10 w-px overflow-hidden bg-accent/40">
-                    <div className="absolute top-0 left-0 h-full w-full animate-scroll-line bg-accent" />
-                  </div>
-                </button>
               </div>
             </div>
           </section>
@@ -268,19 +280,19 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
         </div>
       </div>
 
-      <section id="home-v2-about" className="scroll-mt-24 bg-transparent pt-8 pb-16">
-        <h2 className="mb-12 text-center font-display text-2xl font-bold text-accent md:text-4xl">
+      <section id="home-v2-about" className="scroll-mt-24 bg-transparent pt-6 pb-12 sm:pt-8 sm:pb-16">
+        <h2 className="mb-6 px-4 text-center font-display text-2xl font-bold text-accent sm:mb-12 md:text-4xl">
           Concrete & Interlock – Ottawa
         </h2>
         <HomeScrollReveal>
-          <p className="mx-auto mb-16 max-w-4xl px-8 text-center text-sm text-stone-400">
+          <p className="mx-auto mb-10 max-w-4xl px-4 text-center text-sm text-stone-400 sm:mb-16 sm:px-8">
             <span className="font-semibold text-white">Coliseum Concrete & Interlock</span> has been
             offering stamped concrete, driveways, and architectural hardscapes to homeowners across
             Ottawa since 2000. Request a quote.
           </p>
         </HomeScrollReveal>
 
-        <div className="relative my-16 h-[300px] w-full sm:h-[400px] md:h-[500px]">
+        <div className="relative my-8 h-auto min-h-[240px] w-full py-14 sm:my-16 sm:h-[400px] sm:py-0 md:h-[500px]">
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url('${IMAGES.rebarSlab}')` }}
@@ -294,7 +306,7 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
             className="absolute inset-x-0 bottom-0 z-[1] h-32"
             style={{ background: 'linear-gradient(to top, var(--canvas) 0%, transparent 100%)' }}
           />
-          <div className="relative z-10 flex h-full flex-col items-center justify-center px-8">
+          <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 sm:px-8">
             <HomeScrollReveal>
               <div className="flex flex-col items-center">
                 <h1 className="text-center font-display text-2xl font-bold text-white md:text-4xl">
@@ -305,7 +317,7 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
                   type="button"
                   id="home-v2-perfection-cta"
                   onClick={() => onNavigate('/quote')}
-                  className="btn-shine mt-8 bg-accent px-6 py-3 font-medium text-accent-fg transition-all hover:brightness-110 hover:shadow-[0_0_20px_color-mix(in_srgb,var(--accent)_60%,transparent)]"
+                  className="btn-shine mt-6 bg-accent px-6 py-3 font-medium text-accent-fg transition-all hover:brightness-110 hover:shadow-[0_0_20px_color-mix(in_srgb,var(--accent)_60%,transparent)] sm:mt-8"
                 >
                   Get a Free Quote
                 </button>
@@ -314,7 +326,7 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
           </div>
         </div>
 
-        <div className="mx-auto flex max-w-7xl flex-col gap-12 px-8 lg:flex-row">
+        <div className="mx-auto flex max-w-7xl flex-col gap-10 px-4 sm:px-8 lg:flex-row lg:gap-12">
           <div className="space-y-6 lg:w-1/2">
             <HomeScrollReveal>
               <h2 className="font-display text-2xl font-bold text-accent md:text-4xl">
@@ -360,7 +372,7 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
           <div className="flex justify-center lg:w-1/2">
             <HomeScrollReveal>
               <div
-                className="v2-gold-offset mx-auto aspect-square w-[85vw] max-w-[520px] bg-cover bg-center"
+                className="v2-gold-offset mx-auto aspect-square w-[min(85vw,calc(100%-1.5rem))] max-w-[520px] bg-cover bg-center"
                 style={{ backgroundImage: `url('${IMAGES.finishedDriveway}')` }}
               />
             </HomeScrollReveal>
@@ -368,14 +380,14 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
         </div>
       </section>
 
-      <section className="bg-raised py-16">
+      <section className="bg-raised py-12 sm:py-16">
         <div className="mx-auto max-w-6xl px-4">
           <HomeScrollReveal>
-            <h2 className="mb-12 text-center font-display text-2xl font-bold text-accent md:text-4xl">
+            <h2 className="mb-8 text-center font-display text-2xl font-bold text-accent sm:mb-12 md:text-4xl">
               What Makes Us The Best?
             </h2>
           </HomeScrollReveal>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-8">
             {[
               {
                 icon: Snowflake,
@@ -394,7 +406,7 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
               },
             ].map((card) => (
               <HomeScrollReveal key={card.title}>
-                <div className="shadow-gold h-full bg-elevated p-8">
+                <div className="shadow-gold h-full bg-elevated p-6 sm:p-8">
                   <div className="flex flex-col items-start">
                     <card.icon className="mb-6 h-12 w-12 text-accent" />
                     <h3 className="mb-4 text-xl font-semibold text-accent">{card.title}</h3>
@@ -407,13 +419,13 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
         </div>
       </section>
 
-      <section className="relative bg-canvas py-20">
+      <section className="relative bg-canvas py-12 sm:py-20">
         <div className="mx-auto max-w-6xl px-4">
-          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-            <div className="my-12 flex justify-center lg:my-0">
+          <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12">
+            <div className="my-4 flex justify-center overflow-hidden lg:my-0">
               <div className="relative w-full max-w-md">
                 <div
-                  className="absolute aspect-square w-[90vw] max-w-[560px] bg-contain bg-center bg-no-repeat opacity-15"
+                  className="absolute aspect-square w-[min(90vw,100%)] max-w-[560px] bg-contain bg-center bg-no-repeat opacity-15"
                   style={{
                     backgroundImage: `url('${IMAGES.stampedPatio}')`,
                     left: '50%',
@@ -424,7 +436,7 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
                 />
                 <HomeScrollReveal>
                   <div
-                    className="relative z-10 mx-auto aspect-square w-[75vw] max-w-[400px] bg-cover bg-center shadow-xl"
+                    className="relative z-10 mx-auto aspect-square w-[min(75vw,100%)] max-w-[400px] bg-cover bg-center shadow-xl"
                     style={{ backgroundImage: `url('${IMAGES.projectEntryAfter}')` }}
                   />
                 </HomeScrollReveal>
@@ -483,26 +495,43 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
         </div>
       </section>
 
-      <section className="bg-canvas py-16">
+      <section className="bg-canvas py-12 sm:py-16">
         <div className="mx-auto max-w-6xl px-4">
           <HomeScrollReveal>
-            <h2 className="mb-12 text-center font-display text-2xl font-bold text-accent md:text-4xl">
+            <h2 className="mb-8 text-center font-display text-2xl font-bold text-accent sm:mb-12 md:text-4xl">
               Testimonials
             </h2>
           </HomeScrollReveal>
           <HomeScrollReveal>
-            <div className="mb-8 overflow-hidden">
+            <div
+              className="mb-8 overflow-hidden touch-pan-y"
+              onPointerDown={(event) => {
+                (event.currentTarget as HTMLDivElement).dataset.dragX = String(event.clientX);
+              }}
+              onPointerUp={(event) => {
+                const start = Number((event.currentTarget as HTMLDivElement).dataset.dragX || 0);
+                const delta = event.clientX - start;
+                if (delta > 50) {
+                  setTestimonialPage((page) => Math.max(0, page - 1));
+                } else if (delta < -50) {
+                  setTestimonialPage((page) => Math.min(testimonialPages.length - 1, page + 1));
+                }
+              }}
+            >
               <div
                 className="flex transition-transform duration-500 ease-in-out"
                 style={{ transform: `translateX(-${testimonialPage * 100}%)` }}
               >
                 {testimonialPages.map((page, pageIndex) => (
                   <div key={pageIndex} className="w-full flex-shrink-0">
-                    <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+                    <div className={`grid grid-cols-1 gap-5 ${page.length > 1 ? 'lg:grid-cols-2 lg:gap-8' : ''}`}>
                       {page.map((item) => (
-                        <div key={item.name} className="flex h-[280px] gap-6 bg-elevated p-8">
-                          <div className="flex h-14 w-14 shrink-0 items-center justify-center border-2 border-accent">
-                            <Star className="h-8 w-8 text-accent" fill="currentColor" />
+                        <div
+                          key={item.name}
+                          className="flex min-h-[220px] gap-4 bg-elevated p-5 sm:h-[280px] sm:gap-6 sm:p-8"
+                        >
+                          <div className="flex h-12 w-12 shrink-0 items-center justify-center border-2 border-accent sm:h-14 sm:w-14">
+                            <Star className="h-6 w-6 text-accent sm:h-8 sm:w-8" fill="currentColor" />
                           </div>
                           <div className="flex flex-1 flex-col justify-between">
                             <p className="line-clamp-6 text-sm leading-relaxed text-stone-400">
@@ -538,10 +567,14 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
                   type="button"
                   aria-label={`Go to testimonials page ${index + 1}`}
                   onClick={() => setTestimonialPage(index)}
-                  className={`h-4 w-4 rounded-full border border-accent transition-all duration-300 lg:h-5 lg:w-5 ${
-                    testimonialPage === index ? 'bg-accent' : 'bg-transparent hover:bg-accent/30'
-                  }`}
-                />
+                  className="flex h-11 w-11 items-center justify-center"
+                >
+                  <span
+                    className={`h-3.5 w-3.5 rounded-full border border-accent transition-all duration-300 lg:h-5 lg:w-5 ${
+                      testimonialPage === index ? 'bg-accent' : 'bg-transparent'
+                    }`}
+                  />
+                </button>
               ))}
             </div>
           </HomeScrollReveal>
@@ -559,7 +592,7 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-canvas py-16">
+      <section className="relative overflow-hidden bg-canvas py-12 sm:py-16">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url('${IMAGES.excavate}')` }}
@@ -580,14 +613,14 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
             </h2>
           </HomeScrollReveal>
           <HomeScrollReveal>
-            <p className="mx-auto mb-12 max-w-4xl text-center text-white">
+            <p className="mx-auto mb-8 max-w-4xl px-1 text-center text-sm text-white sm:mb-12 sm:text-base">
               If you are ready for a line-item estimate, please use the quote request on this page.
               This form is a demo and does not send messages.
             </p>
           </HomeScrollReveal>
           <HomeScrollReveal>
             <div className="mx-auto max-w-3xl">
-              <div className="bg-surface p-8">
+              <div className="bg-surface p-5 sm:p-8">
                 <h3 className="mb-8 text-center font-display text-xl font-semibold text-white">
                   Contact
                 </h3>
