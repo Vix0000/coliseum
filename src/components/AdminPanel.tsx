@@ -89,11 +89,13 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ currentPath }) => {
     background,
     contact,
     hours,
+    homeVersion,
     setAccent,
     setBackground,
     setPhone,
     setEmail,
     setHours,
+    setHomeVersion,
     resetTheme,
   } = useTheme();
   const { announcement, setAnnouncement, clearAnnouncement } = useAnnouncement();
@@ -155,7 +157,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ currentPath }) => {
     palette.accent === DEFAULT_ACCENT &&
     background.id === DEFAULT_BACKGROUND_ID &&
     isDefaultContact(contact) &&
-    isDefaultHours(hours);
+    isDefaultHours(hours) &&
+    homeVersion === 'v1';
 
   const liftAboveStickyCta = showsMobileStickyCta(currentPath);
 
@@ -218,6 +221,43 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ currentPath }) => {
           </div>
 
           <div className="space-y-3">
+            <section className={SETTINGS_BOX}>
+              <p className="text-[11px] font-mono-code font-semibold uppercase tracking-wider text-stone-400">
+                Homepage
+              </p>
+              <div className="grid grid-cols-2 gap-1.5">
+                {(
+                  [
+                    { id: 'v1', label: 'Original' },
+                    { id: 'v2', label: 'Cinematic v2' },
+                  ] as const
+                ).map((option) => {
+                  const selected = homeVersion === option.id;
+                  return (
+                    <button
+                      key={option.id}
+                      type="button"
+                      id={`admin-home-version-${option.id}`}
+                      aria-pressed={selected}
+                      onClick={() => setHomeVersion(option.id)}
+                      className={`rounded-lg border-2 px-2 py-2 font-mono-code text-[11px] uppercase tracking-wider transition-colors ${
+                        selected
+                          ? 'border-accent bg-accent/15 text-white'
+                          : 'border-white/15 bg-white/5 text-stone-300 hover:border-white/25 hover:bg-white/10 hover:text-white'
+                      }`}
+                    >
+                      {option.label}
+                    </button>
+                  );
+                })}
+              </div>
+              <p className="text-[11px] leading-relaxed text-stone-500">
+                {homeVersion === 'v2'
+                  ? 'Full-screen video home with cinematic scrolling.'
+                  : 'The original editorial home page.'}
+              </p>
+            </section>
+
             <section className={SETTINGS_BOX}>
               <p className="text-[11px] font-mono-code font-semibold uppercase tracking-wider text-stone-400">
                 Accent

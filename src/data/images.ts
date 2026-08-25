@@ -1,5 +1,10 @@
 import { withBase } from '../lib/basePath';
 
+export const VIDEOS = {
+  hero: withBase('/videos/concrete-hero.mp4'),
+  heroPoster: withBase('/videos/concrete-hero-poster.jpg'),
+} as const;
+
 export const IMAGES = {
   stampedPatio: withBase('/images/stamped-patio.jpg'),
   concreteDriveway: withBase('/images/concrete-driveway.jpg'),

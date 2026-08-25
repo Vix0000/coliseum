@@ -120,3 +120,51 @@
 body.mobile-nav-open #admin-panel-root {
   display: none;
 }
+
+@keyframes shine {
+  0% { left: -100%; }
+  20% { left: 200%; }
+  100% { left: 200%; }
+}
+
+@keyframes scroll-line {
+  0% { transform: translateY(-100%); }
+  50% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
+}
+
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--accent) 55%, white) 50%,
+    transparent 100%
+  );
+  transform: skew(-20deg);
+  animation: shine 6s infinite;
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+.animate-scroll-line {
+  animation: scroll-line 2s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+}
+
+.shadow-gold {
+  box-shadow: 8px 8px 2px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.v2-gold-offset {
+  box-shadow: 15px -15px 0 0 color-mix(in srgb, var(--accent) 45%, #000);
+}
