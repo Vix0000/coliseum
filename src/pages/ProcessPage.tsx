@@ -2,12 +2,14 @@ import React from 'react';
 import { Layers, CheckCircle2, ShieldCheck, AlertTriangle } from 'lucide-react';
 import { PROCESS_STEPS } from '../data/process';
 import { SeoHead } from '../components/SeoHead';
+import { useCompany } from '../components/ThemeContext';
 
 interface ProcessPageProps {
   onNavigate: (path: string) => void;
 }
 
 export const ProcessPage: React.FC<ProcessPageProps> = ({ onNavigate }) => {
+  const COMPANY_INFO = useCompany();
   const commonShortcuts = [
     {
       bad: 'Shallow 3"–4" excavation into topsoil',
@@ -34,8 +36,8 @@ export const ProcessPage: React.FC<ProcessPageProps> = ({ onNavigate }) => {
   return (
     <div id="process-page" className="pt-24 pb-20 bg-canvas text-stone-200">
       <SeoHead
-        title="Our 5-Step Concrete Process | Coliseum Concrete Ottawa"
-        description="Learn how Coliseum Concrete executes outdoor projects in Ottawa: Laser grading, deep aggregate base compaction, steel rebar reinforcement, and precision stamping."
+        title={`Our 5-Step Concrete Process | ${COMPANY_INFO.name}`}
+        description={`Learn how ${COMPANY_INFO.name} executes outdoor projects in Ottawa: Laser grading, deep aggregate base compaction, steel rebar reinforcement, and precision stamping.`}
         canonicalPath="/process"
       />
 
@@ -120,7 +122,7 @@ export const ProcessPage: React.FC<ProcessPageProps> = ({ onNavigate }) => {
           ))}
         </div>
 
-        {/* The Difference Table: Coliseum vs Low-Bid Cut Corners */}
+        {/* The Difference Table: Standards vs Low-Bid Cut Corners */}
         <div className="mt-24 bg-surface border-2 border-white/10 rounded-2xl p-8 sm:p-12 shadow-2xl space-y-8">
           <div>
             <div className="flex items-center gap-2 text-xs font-mono-code text-accent uppercase tracking-wider">
@@ -128,7 +130,7 @@ export const ProcessPage: React.FC<ProcessPageProps> = ({ onNavigate }) => {
               <span>Why Workmanship Matters</span>
             </div>
             <h3 className="text-2xl sm:text-3xl font-display font-bold text-white mt-1">
-              Coliseum Standards vs. Low-Bid Shortcuts
+              {COMPANY_INFO.shortName} Standards vs. Low-Bid Shortcuts
             </h3>
             <p className="text-stone-400 text-xs sm:text-sm mt-2 max-w-2xl">
               Concrete cannot be easily repaired once poured. Discover why cutting corners on base preparation or air entrainment leads to premature failure in Ottawa.
@@ -149,7 +151,7 @@ export const ProcessPage: React.FC<ProcessPageProps> = ({ onNavigate }) => {
                 <div className="flex items-start gap-2 text-xs text-accent">
                   <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" />
                   <div>
-                    <span className="font-semibold uppercase font-mono-code block text-white">The Coliseum Way:</span>
+                    <span className="font-semibold uppercase font-mono-code block text-white">The {COMPANY_INFO.shortName} Way:</span>
                     <span className="text-stone-200">{item.good}</span>
                   </div>
                 </div>

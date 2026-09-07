@@ -18,24 +18,24 @@ interface SocialLinksProps {
 }
 
 export const SocialLinks: React.FC<SocialLinksProps> = ({ className = '' }) => {
-  const { facebookUrl, instagramUrl } = useCompany();
+  const COMPANY_INFO = useCompany();
 
   return (
     <div className={`flex items-center gap-3 ${className}`}>
       <a
-        href={facebookUrl}
+        href={COMPANY_INFO.facebookUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Coliseum on Facebook"
+        aria-label={`${COMPANY_INFO.name} on Facebook`}
         className="inline-flex h-10 w-10 items-center justify-center rounded-lg border-2 border-white/15 bg-white/5 text-white transition-colors hover:border-[#1877f2] hover:bg-[#1877f2]"
       >
         <FacebookIcon className="h-4 w-4" />
       </a>
       <a
-        href={instagramUrl}
+        href={COMPANY_INFO.instagramUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Coliseum on Instagram"
+        aria-label={`${COMPANY_INFO.name} on Instagram`}
         className="inline-flex h-10 w-10 items-center justify-center rounded-lg border-2 border-white/15 bg-white/5 text-white transition-colors hover:border-[#E1306C] hover:bg-[#E1306C]"
       >
         <InstagramIcon className="h-4 w-4" />

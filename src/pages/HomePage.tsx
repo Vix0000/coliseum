@@ -6,12 +6,14 @@ import { LocalOttawaSection } from '../components/LocalOttawaSection';
 import { SeoHead } from '../components/SeoHead';
 import { IMAGES } from '../data/images';
 import { usePhoneCall } from '../components/PhoneCallContext';
+import { useCompany } from '../components/ThemeContext';
 
 interface HomePageProps {
   onNavigate: (path: string) => void;
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
+  const COMPANY_INFO = useCompany();
   const { openPhoneModal } = usePhoneCall();
 
   const editorialWorkCategories = [
@@ -68,7 +70,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   return (
     <div id="home-page-container">
       <SeoHead
-        title="Coliseum Concrete & Interlock | Ottawa's Concrete & Hardscape Contractor"
+        title={`${COMPANY_INFO.name} | Ottawa's Concrete & Hardscape Contractor`}
         description="Premium concrete, stamped concrete, and interlock craftsmanship for Ottawa homes. Licensed and insured contractor specializing in driveways, patios, and stairs."
         canonicalPath="/"
       />

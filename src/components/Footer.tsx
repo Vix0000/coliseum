@@ -31,10 +31,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, padForStickyCta = fa
           <div className="lg:col-span-2 space-y-4">
             <div className="flex flex-col">
               <span className="font-display text-2xl font-bold tracking-[0.2em] text-white">
-                COLISEUM
+                {COMPANY_INFO.mark}
               </span>
               <span className="text-xs font-mono-code tracking-[0.16em] text-stone-400 uppercase mt-0.5">
-                Concrete & Interlock
+                {COMPANY_INFO.markSubtitle}
               </span>
             </div>
 
@@ -115,7 +115,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, padForStickyCta = fa
               </li>
               <li>
                 <button onClick={() => onNavigate('/about')} className="hover:text-white transition-colors text-left">
-                  Why Choose Coliseum
+                  Why Choose {COMPANY_INFO.shortName}
                 </button>
               </li>
               <li>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Phone, ChevronDown, Menu, X, ShieldCheck, ArrowRight } from 'lucide-react';
 import { SERVICES } from '../data/services';
 import { usePhoneCall } from './PhoneCallContext';
+import { useCompany } from './ThemeContext';
 
 const SERVICE_NAV_HINTS: Record<string, string> = {
   'stamped-concrete': 'Patios, walkways & decorative finishes',
@@ -29,16 +30,19 @@ const QUOTE_BTN =
   'bg-accent hover:bg-accent-hover active:bg-accent-active border border-accent hover:border-accent-hover active:border-accent-active text-accent-fg font-semibold text-xs uppercase tracking-wider rounded transition-all shadow-lg hover:shadow-accent/20 active:scale-[0.98] px-5 py-2.5';
 const MOBILE_MENU_MS = 300;
 
-const BrandLockup: React.FC = () => (
-  <>
-    <span className="font-display tracking-[0.22em] font-bold text-white group-hover:text-accent transition-colors leading-none text-xl sm:text-2xl">
-      COLISEUM
-    </span>
-    <span className="font-mono-code tracking-[0.18em] text-stone-400 uppercase leading-none text-[10px] sm:text-[11px] mt-1">
-      Concrete & Interlock
-    </span>
-  </>
-);
+const BrandLockup: React.FC = () => {
+  const { mark, markSubtitle } = useCompany();
+  return (
+    <>
+      <span className="font-display tracking-[0.22em] font-bold text-white group-hover:text-accent transition-colors leading-none text-xl sm:text-2xl">
+        {mark}
+      </span>
+      <span className="font-mono-code tracking-[0.18em] text-stone-400 uppercase leading-none text-[10px] sm:text-[11px] mt-1">
+        {markSubtitle}
+      </span>
+    </>
+  );
+};
 
 interface HeaderProps {
   currentPath: string;
@@ -46,6 +50,7 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate }) => {
+  const COMPANY_INFO = useCompany();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileMenuMounted, setMobileMenuMounted] = useState(false);
@@ -125,7 +130,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate }) => {
             id="brand-logo-btn"
             onClick={() => handleNav('/')}
             className={`${mobileMenuOpen ? 'hidden' : 'flex'} lg:flex flex-col items-start text-left group`}
-            aria-label="Coliseum Concrete & Interlock Home"
+            aria-label={`${COMPANY_INFO.name} Home`}
           >
             <BrandLockup />
           </button>
@@ -241,7 +246,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate }) => {
               type="button"
               onClick={openPhoneModal}
               className={`hidden lg:flex ${PHONE_BTN}`}
-              aria-label="Call Coliseum Concrete"
+              aria-label={`Call ${COMPANY_INFO.name}`}
             >
               <Phone className="w-4 h-4" />
             </button>
@@ -260,7 +265,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate }) => {
               type="button"
               onClick={openPhoneModal}
               className="shrink-0 p-2.5 rounded-lg bg-white/5 border-2 border-white/10 text-accent hover:text-white hover:bg-white/10 active:bg-white/15 transition-colors"
-              aria-label="Call Coliseum Concrete"
+              aria-label={`Call ${COMPANY_INFO.name}`}
             >
               <Phone className="w-6 h-6" />
             </button>
@@ -346,7 +351,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate }) => {
               onClick={() => handleNav('/about')}
               className="w-full text-left px-3 py-2.5 text-stone-200 hover:text-white hover:bg-white/5 rounded text-sm font-medium"
             >
-              About Coliseum
+              About {COMPANY_INFO.shortName}
             </button>
 
             <button

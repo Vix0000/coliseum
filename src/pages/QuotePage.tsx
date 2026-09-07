@@ -16,7 +16,7 @@ export const QuotePage: React.FC<QuotePageProps> = ({ initialProjectType, onNavi
   return (
     <div id="quote-experience-page" className="pt-24 pb-20 bg-canvas text-stone-200 min-h-screen">
       <SeoHead
-        title="Request a Concrete & Interlock Quote | Coliseum Ottawa"
+        title={`Request a Concrete & Interlock Quote | ${COMPANY_INFO.name}`}
         description="Request a no-obligation quote for an Ottawa concrete driveway, stamped concrete patio, or interlock project."
         canonicalPath="/quote"
       />

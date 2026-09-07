@@ -1,17 +1,19 @@
 import React from 'react';
 import { ArrowRight, Home, Compass } from 'lucide-react';
 import { SeoHead } from '../components/SeoHead';
+import { useCompany } from '../components/ThemeContext';
 
 interface NotFoundPageProps {
   onNavigate: (path: string) => void;
 }
 
 export const NotFoundPage: React.FC<NotFoundPageProps> = ({ onNavigate }) => {
+  const COMPANY_INFO = useCompany();
   return (
     <div id="not-found-page" className="pt-32 pb-24 bg-canvas text-stone-200 min-h-[80vh] flex items-center">
       <SeoHead
-        title="Page Not Found | Coliseum Concrete & Interlock"
-        description="This path doesn't lead anywhere. Let's get you back to Coliseum Concrete & Interlock's Ottawa project gallery and services."
+        title={`Page Not Found | ${COMPANY_INFO.name}`}
+        description={`This path doesn't lead anywhere. Let's get you back to ${COMPANY_INFO.name}'s Ottawa project gallery and services.`}
         canonicalPath="/404"
       />
 
@@ -43,7 +45,7 @@ export const NotFoundPage: React.FC<NotFoundPageProps> = ({ onNavigate }) => {
             className="px-6 py-3.5 bg-white/10 hover:bg-white/15 active:bg-white/20 border-2 border-white/20 text-white font-mono-code text-xs uppercase tracking-wider rounded transition-all flex items-center gap-2"
           >
             <Home className="w-4 h-4" />
-            <span>Return to Coliseum Homepage</span>
+            <span>Return to Homepage</span>
           </button>
         </div>
       </div>

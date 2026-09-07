@@ -60,7 +60,7 @@ export const EmailModal: React.FC<EmailModalProps> = ({ onClose }) => {
             <Mail className="w-5 h-5 text-accent" />
           </div>
           <h2 id="email-modal-title" className="text-lg font-display font-bold text-white">
-            Email Coliseum
+            Email {COMPANY_INFO.shortName}
           </h2>
           <p className="mt-2 font-mono-code text-sm sm:text-base text-accent tracking-wide break-all">
             {COMPANY_INFO.email}

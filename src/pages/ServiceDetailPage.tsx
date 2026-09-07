@@ -33,7 +33,7 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
   return (
     <div id="service-detail-page" className="pt-20 bg-canvas text-stone-200">
       <SeoHead
-        title={`${service.title} Ottawa | Coliseum Concrete & Interlock`}
+        title={`${service.title} Ottawa | ${COMPANY_INFO.name}`}
         description={service.shortDescription}
         canonicalPath={`/services/${service.slug}`}
       />

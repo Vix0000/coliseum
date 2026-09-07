@@ -1,4 +1,4 @@
-export const THEME_STORAGE_KEY = 'coliseum-theme';
+export const THEME_STORAGE_KEY = 'capitol-demo-theme';
 export const ACCENT_STORAGE_KEY = THEME_STORAGE_KEY;
 export const DEFAULT_ACCENT = '#E0A84D';
 export const TEXT_ACCENT = '#F3F4F6';
@@ -24,7 +24,7 @@ export const DEFAULT_PALETTE: AccentPalette = {
 };
 
 export const ACCENT_PRESETS: AccentPreset[] = [
-  { id: 'gold', label: 'Coliseum Gold', hex: DEFAULT_ACCENT },
+  { id: 'gold', label: 'Capitol Gold', hex: DEFAULT_ACCENT },
   { id: 'sage', label: 'Sage', hex: '#7A9E7E' },
   { id: 'steel', label: 'Steel', hex: '#6B8CAE' },
   { id: 'terracotta', label: 'Terracotta', hex: '#C45C3E' },

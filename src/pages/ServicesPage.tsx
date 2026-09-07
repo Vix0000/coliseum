@@ -15,7 +15,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate }) => {
   return (
     <div id="services-page" className="pt-24 pb-20 bg-canvas text-stone-200">
       <SeoHead
-        title="Concrete & Interlock Services | Coliseum Concrete Ottawa"
+        title={`Concrete & Interlock Services | ${COMPANY_INFO.name}`}
         description="Comprehensive concrete and hardscape services in Ottawa: Stamped concrete patios, concrete driveways, interlock stonework, entrance stairs, and garage slabs."
         canonicalPath="/services"
       />
