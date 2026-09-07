@@ -43,7 +43,7 @@ export const LocalOttawaSection: React.FC = () => {
             </p>
 
             <p className="text-stone-400 text-sm leading-relaxed">
-              A contractor building in Ottawa cannot use standard generic building guidelines. Coliseum specifies excavation depths, air-entrained mix designs, and compaction protocols calibrated specifically for Eastern Ontario soil and frost conditions.
+              A contractor building in Ottawa cannot use standard generic building guidelines. {COMPANY_INFO.name} specifies excavation depths, air-entrained mix designs, and compaction protocols calibrated specifically for Eastern Ontario soil and frost conditions.
             </p>
 
             {/* Communities list */}

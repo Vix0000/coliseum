@@ -60,7 +60,7 @@ export const PhoneCallModal: React.FC<PhoneCallModalProps> = ({ onClose }) => {
             <Phone className="w-5 h-5 text-accent" />
           </div>
           <h2 id="phone-call-modal-title" className="text-lg font-display font-bold text-white">
-            Call Coliseum
+            Call {COMPANY_INFO.shortName}
           </h2>
           <p className="mt-2 font-mono-code text-xl text-accent tracking-wide">
             {COMPANY_INFO.phoneFormatted}

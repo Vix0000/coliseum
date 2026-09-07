@@ -3,6 +3,7 @@ import { Sparkles, Search, MapPin, Eye, ArrowRight } from 'lucide-react';
 import { PROJECTS, PROJECT_CATEGORIES } from '../data/projects';
 import { ProjectItem } from '../types';
 import { SeoHead } from '../components/SeoHead';
+import { useCompany } from '../components/ThemeContext';
 
 interface ProjectsPageProps {
   initialCategory?: string;
@@ -15,6 +16,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
   onOpenLightbox,
   onNavigate,
 }) => {
+  const COMPANY_INFO = useCompany();
   const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
   const [searchQuery, setSearchQuery] = useState<string>('');
 
@@ -39,7 +41,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
   return (
     <div id="projects-gallery-page" className="pt-24 pb-20 bg-canvas text-stone-200 min-h-screen">
       <SeoHead
-        title="Ottawa Concrete & Interlock Project Portfolio | Coliseum Concrete"
+        title={`Ottawa Concrete & Interlock Project Portfolio | ${COMPANY_INFO.name}`}
         description="Explore our portfolio of stamped concrete patios, reinforced concrete driveways, interlock stonework, and entrance stairs completed across Ottawa, Kanata, Nepean, and Orleans."
         canonicalPath="/projects"
       />

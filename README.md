@@ -1,8 +1,8 @@
-# Coliseum
+# Capitol Demo Concrete
 
-Static demo of the Coliseum Concrete & Interlock marketing site. Quote and contact forms stay on-device; nothing is submitted or emailed.
+Front-end marketing and interactive quote estimation demo for Capitol Demo Concrete, an Ottawa concrete and hardscape contractor concept. Built as an Omnivera front-end demo showcasing responsive design, multi-step quote wizards, and theme customization. Quote and contact forms stay on-device; nothing is submitted or emailed.
 
-Live site: https://vix0000.github.io/coliseum/
+Live site: https://omniveraca.github.io/coliseum/
 
 ## Stack
 
@@ -16,7 +16,7 @@ Live site: https://vix0000.github.io/coliseum/
 Prerequisite: Node.js 20+ recommended.
 
 ```bash
-git clone https://github.com/Vix0000/coliseum.git
+git clone https://github.com/omniveraca/coliseum.git
 cd coliseum
 npm install
 npm run dev
@@ -36,4 +36,3 @@ npm run preview  # Serve the production build locally
 ## License
 
 Proprietary. See [LICENSE](LICENSE). All rights reserved.
-

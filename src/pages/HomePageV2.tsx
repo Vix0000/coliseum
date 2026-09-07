@@ -164,7 +164,7 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
   return (
     <div id="home-v2-page" className="bg-canvas">
       <SeoHead
-        title="Coliseum Concrete & Interlock | Ottawa's Concrete & Hardscape Contractor"
+        title={`${COMPANY_INFO.name} | Ottawa's Concrete & Hardscape Contractor`}
         description="Premium concrete, stamped concrete, and interlock craftsmanship for Ottawa homes. Licensed and insured contractor specializing in driveways, patios, and stairs."
         canonicalPath="/"
       />
@@ -299,7 +299,7 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
         </h2>
         <HomeScrollReveal>
           <p className="mx-auto mb-10 max-w-4xl px-4 text-center text-sm text-stone-400 sm:mb-16 sm:px-8">
-            <span className="font-semibold text-white">Coliseum Concrete & Interlock</span> has been
+            <span className="font-semibold text-white">{COMPANY_INFO.name}</span> has been
             offering stamped concrete, driveways, and architectural hardscapes to homeowners across
             Ottawa for over 20 years. Most residential driveways and patios are completed in 3 to 7
             days during the May through October season. Request a quote.
@@ -359,7 +359,7 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
                   stamped stone terrace
                 </button>{' '}
                 or a clean architectural broom driveway, the experience at{' '}
-                <span className="font-semibold text-white">Coliseum Concrete & Interlock</span> will
+                <span className="font-semibold text-white">{COMPANY_INFO.name}</span> will
                 have you wondering why you waited this long.
               </p>
             </HomeScrollReveal>
@@ -467,7 +467,7 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
               <HomeScrollReveal>
                 <p className="leading-relaxed text-stone-400">
                   As one of Ottawa&apos;s licensed and insured hardscape contractors,{' '}
-                  <span className="font-bold text-white">Coliseum Concrete & Interlock</span> has you
+                  <span className="font-bold text-white">{COMPANY_INFO.name}</span> has you
                   covered whether you need a full{' '}
                   <button
                     type="button"
@@ -590,7 +590,7 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
                 href={COMPANY_INFO.reviewsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Read Coliseum reviews on Google"
+                aria-label={`Read ${COMPANY_INFO.name} reviews on Google`}
                 className="border-2 border-white px-8 py-3 font-medium text-white transition-all duration-300 hover:border-accent hover:bg-accent hover:text-accent-fg"
               >
                 Reviews
@@ -756,7 +756,7 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
                       <span className="text-accent">*</span> These fields are mandatory
                     </p>
                     <p className="text-xs text-stone-400">
-                      Coliseum is committed to handling inquiries with care. To know and exercise
+                      {COMPANY_INFO.shortName} is committed to handling inquiries with care. To know and exercise
                       your rights, please consult our{' '}
                       <button
                         type="button"
@@ -800,7 +800,7 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
           href={COMPANY_INFO.facebookUrl}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Coliseum on Facebook"
+          aria-label={`${COMPANY_INFO.name} on Facebook`}
           className="group relative flex items-center"
         >
           <span className="absolute right-full mr-1 flex h-12 translate-x-2 items-center bg-[#1877f2] px-3 text-sm whitespace-nowrap text-white opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
@@ -814,7 +814,7 @@ export const HomePageV2: React.FC<HomePageV2Props> = ({ onNavigate }) => {
           href={COMPANY_INFO.instagramUrl}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Coliseum on Instagram"
+          aria-label={`${COMPANY_INFO.name} on Instagram`}
           className="group relative flex items-center"
         >
           <span className="absolute right-full mr-1 flex h-12 translate-x-2 items-center bg-[#E1306C] px-3 text-sm whitespace-nowrap text-white opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">

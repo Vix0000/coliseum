@@ -1,4 +1,4 @@
-export const ANNOUNCEMENT_STORAGE_KEY = 'coliseum-announcement';
+export const ANNOUNCEMENT_STORAGE_KEY = 'capitol-demo-announcement';
 export const ANNOUNCEMENT_MESSAGE_MAX = 160;
 export const ANNOUNCEMENT_LABEL_MAX = 32;
 

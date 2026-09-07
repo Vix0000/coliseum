@@ -8,7 +8,7 @@ export const SERVICES: ServiceDetail[] = [
     title: 'Stamped Concrete',
     tagline: 'The timeless texture of natural stone with the monolithic permanence of reinforced concrete.',
     shortDescription: 'Decorative stamped concrete patios, driveways, walkways, and pool surrounds with rich natural textures, custom integral colours, and antiquing releases.',
-    fullDescription: 'Stamped concrete delivers the sophisticated beauty of slate, flagstone, cobblestone, or fieldstone without the individual paver shifting, weed growth, or uneven settling common to unmortared stones in Ottawa’s severe winter climate. Coliseum creates deeply textured, monolithic surfaces poured with 32+ MPa air-entrained concrete, reinforced with steel rebar, and protected with breathable high-solids sealers engineered specifically for freeze-thaw endurance.',
+    fullDescription: 'Stamped concrete delivers the sophisticated beauty of slate, flagstone, cobblestone, or fieldstone without the individual paver shifting, weed growth, or uneven settling common to unmortared stones in Ottawa’s severe winter climate. We create deeply textured, monolithic surfaces poured with 32+ MPa air-entrained concrete, reinforced with steel rebar, and protected with breathable high-solids sealers engineered specifically for freeze-thaw endurance.',
     heroImage: IMAGES.projectEntryAfter,
     features: [
       {
@@ -66,7 +66,7 @@ export const SERVICES: ServiceDetail[] = [
     title: 'Concrete Driveways',
     tagline: 'Heavy-duty residential driveways engineered for Ottawa vehicle loads, snow plows, and winter salts.',
     shortDescription: 'Engineered monolithic concrete driveways with clean architectural broom finish, stamped borders, or full decorative finishes built on deep compacted aggregate.',
-    fullDescription: 'Your driveway is the largest visual hardscape on your property and bears the heaviest structural demands. Unlike asphalt, which softens in July heat, develops tire ruts, and requires frequent toxic oil-based sealants, a Coliseum poured concrete driveway provides decades of clean, structural performance. Built with 5 to 6-inch thickness, steel reinforcement grids, and engineered control joints, our driveways maintain their level grade even over difficult Ottawa clay subsoils.',
+    fullDescription: 'Your driveway is the largest visual hardscape on your property and bears the heaviest structural demands. Unlike asphalt, which softens in July heat, develops tire ruts, and requires frequent toxic oil-based sealants, our poured concrete driveways provide decades of clean, structural performance. Built with 5 to 6-inch thickness, steel reinforcement grids, and engineered control joints, our driveways maintain their level grade even over difficult Ottawa clay subsoils.',
     heroImage: IMAGES.concreteDriveway,
     features: [
       {
@@ -120,7 +120,7 @@ export const SERVICES: ServiceDetail[] = [
     title: 'Concrete Patios & Outdoor Living',
     tagline: 'Custom outdoor living spaces tailored to your backyard layout, family lifestyle, and Ottawa seasons.',
     shortDescription: 'Custom poured concrete and stamped patio terraces designed for dining, outdoor kitchens, fire pits, and pool surrounds with zero weed maintenance.',
-    fullDescription: 'A backyard patio should be an effortless extension of your interior living space. Coliseum designs and pours custom backyard concrete terraces that embrace your home’s architecture, natural yard grade, and sunlight patterns. Whether you envision a sleek contemporary brushed concrete terrace or an expansive multi-level stamped stone patio with built-in sitting benches and fire pits, we deliver permanent, stable outdoor comfort.',
+    fullDescription: 'A backyard patio should be an effortless extension of your interior living space. We design and pour custom backyard concrete terraces that embrace your home’s architecture, natural yard grade, and sunlight patterns. Whether you envision a sleek contemporary brushed concrete terrace or an expansive multi-level stamped stone patio with built-in sitting benches and fire pits, we deliver permanent, stable outdoor comfort.',
     heroImage: IMAGES.stampedPatio,
     features: [
       {
@@ -170,7 +170,7 @@ export const SERVICES: ServiceDetail[] = [
     title: 'Concrete Stairs & Porches',
     tagline: 'Permanent monolithic entrance steps and front porches built to frost-depth specifications.',
     shortDescription: 'Solid poured concrete stairs, entrance landings, and front porches anchored to frost footings, eliminating winter shifting, cracked parging, and loose bricks.',
-    fullDescription: 'Front entrance stairs are subject to Ottawa’s most unforgiving winter forces: constant freeze-thaw cycles, direct salt exposure, and ground heave. Mortared brick and hollow block steps frequently crack and pull away from the home within 5–7 years. Coliseum pours solid monolithic concrete stair structures pinned directly into the foundation wall with structural rebar and supported on frost-depth piers (typically 1.2 m / about 4 ft deep).',
+    fullDescription: 'Front entrance stairs are subject to Ottawa’s most unforgiving winter forces: constant freeze-thaw cycles, direct salt exposure, and ground heave. Mortared brick and hollow block steps frequently crack and pull away from the home within 5–7 years. We pour solid monolithic concrete stair structures pinned directly into the foundation wall with structural rebar and supported on frost-depth piers (typically 1.2 m / about 4 ft deep).',
     heroImage: IMAGES.projectEntryAfter,
     features: [
       {
@@ -220,7 +220,7 @@ export const SERVICES: ServiceDetail[] = [
     title: 'Garage Floors & Slabs',
     tagline: 'High-density power-troweled slabs engineered for heavy vehicles, workshops, and road salt resistance.',
     shortDescription: 'Precision laser-screeded residential garage floor replacements, detached workshop slabs, shed pads, and structural equipment pads.',
-    fullDescription: 'Ottawa garages endure harsh conditions: vehicles dripping corrosive slush, road deicing salts, snowmelt runoff, and heavy wheel point loads. Over time, unreinforced builder-grade garage floors pit, scale, crack, and settle. Coliseum replaces compromised slabs with 5–6" high-strength reinforced concrete, laser-pitched for efficient water drainage toward overhead doors, and power-troweled to an ultra-dense, durable finish.',
+    fullDescription: 'Ottawa garages endure harsh conditions: vehicles dripping corrosive slush, road deicing salts, snowmelt runoff, and heavy wheel point loads. Over time, unreinforced builder-grade garage floors pit, scale, crack, and settle. We replace compromised slabs with 5–6" high-strength reinforced concrete, laser-pitched for efficient water drainage toward overhead doors, and power-troweled to an ultra-dense, durable finish.',
     heroImage: IMAGES.concreteSlab,
     features: [
       {
@@ -269,7 +269,7 @@ export const SERVICES: ServiceDetail[] = [
     title: 'Interlock Craftsmanship',
     tagline: 'Premium architectural pavers, driveway extensions, retaining garden walls, and custom stone walkways.',
     shortDescription: 'High-format stone pavers, interlock driveways, driveway extensions, front walkways, and garden steps installed over open-graded aggregate bases.',
-    fullDescription: 'Interlock stone offers unmatched modular flexibility, rich natural colors, and individual paver character. However, an interlock installation is only as good as what lies beneath the surface. Coliseum builds interlock projects on an open-graded aggregate base system (HPB) with heavy non-woven geotextile separation, spiked commercial edge restraints, and rain-safe polymeric sand jointing—ensuring the surface remains flat and weed-free through decades of Ottawa winters.',
+    fullDescription: 'Interlock stone offers unmatched modular flexibility, rich natural colors, and individual paver character. However, an interlock installation is only as good as what lies beneath the surface. We build interlock projects on an open-graded aggregate base system (HPB) with heavy non-woven geotextile separation, spiked commercial edge restraints, and rain-safe polymeric sand jointing—ensuring the surface remains flat and weed-free through decades of Ottawa winters.',
     heroImage: IMAGES.interlockPatio,
     features: [
       {

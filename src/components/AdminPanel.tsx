@@ -202,7 +202,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ currentPath }) => {
                   Admin
                 </p>
                 <h2 id="admin-panel-title" className="mt-1 font-display text-lg font-bold text-white">
-                  Hi Jonathan
+                  Demo admin
                 </h2>
               </div>
               <button

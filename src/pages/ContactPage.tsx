@@ -66,8 +66,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
   return (
     <div id="contact-page" className="pt-24 pb-20 bg-canvas text-stone-200 min-h-screen">
       <SeoHead
-        title={`Contact Coliseum Concrete & Interlock | Ottawa ${COMPANY_INFO.phoneFormatted}`}
-        description={`Contact Coliseum Concrete & Interlock in Ottawa. Call ${COMPANY_INFO.phoneFormatted} or email ${COMPANY_INFO.email} for free residential estimates in Ottawa, Kanata, Nepean, and Orleans.`}
+        title={`Contact ${COMPANY_INFO.name} | Ottawa ${COMPANY_INFO.phoneFormatted}`}
+        description={`Contact ${COMPANY_INFO.name} in Ottawa. Call ${COMPANY_INFO.phoneFormatted} or email ${COMPANY_INFO.email} for free residential estimates in Ottawa, Kanata, Nepean, and Orleans.`}
         canonicalPath="/contact"
       />
 

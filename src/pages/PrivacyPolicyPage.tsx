@@ -13,8 +13,8 @@ export const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate
   return (
     <div id="privacy-policy-page" className="pt-24 pb-20 bg-canvas text-stone-200">
       <SeoHead
-        title="Privacy Policy | Coliseum Concrete & Interlock"
-        description="How Coliseum Concrete & Interlock handles contact details, quote requests, and site photos submitted through this website."
+        title={`Privacy Policy | ${COMPANY_INFO.name}`}
+        description={`How ${COMPANY_INFO.name} handles contact details, quote requests, and site photos submitted through this website.`}
         canonicalPath="/privacy"
       />
 

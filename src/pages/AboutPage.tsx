@@ -9,8 +9,8 @@ export const AboutPage: React.FC = () => {
   return (
     <div id="about-page" className="pt-24 pb-20 bg-canvas text-stone-200">
       <SeoHead
-        title="About Coliseum Concrete & Interlock | Ottawa Hardscape Craftsmen"
-        description="Learn about Coliseum Concrete & Interlock: City of Ottawa licensed and insured hardscape contractor with over 20 years of local hardscape work."
+        title={`About ${COMPANY_INFO.name} | Ottawa Hardscape Craftsmen`}
+        description={`Learn about ${COMPANY_INFO.name}: City of Ottawa licensed and insured hardscape contractor with over 20 years of local hardscape work.`}
         canonicalPath="/about"
       />
 
@@ -26,7 +26,7 @@ export const AboutPage: React.FC = () => {
             Craftsmanship Built for Permanence.
           </h1>
           <p className="text-stone-400 text-base sm:text-lg mt-3 leading-relaxed">
-            Coliseum Concrete & Interlock is an established, licensed and insured residential hardscape contractor serving homeowners throughout the Ottawa region.
+            {COMPANY_INFO.name} is an established, licensed and insured residential hardscape contractor serving homeowners throughout the Ottawa region.
           </p>
         </div>
 
@@ -75,7 +75,7 @@ export const AboutPage: React.FC = () => {
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border-2 border-white/15 bg-black">
               <img
                 src={IMAGES.interlockInstall}
-                alt="Coliseum Concrete craftsmanship in Ottawa backyard"
+                alt={`${COMPANY_INFO.name} craftsmanship in Ottawa backyard`}
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />
@@ -89,7 +89,7 @@ export const AboutPage: React.FC = () => {
 
         </div>
 
-        {/* The 4 Tenets of Coliseum Workmanship */}
+        {/* The 4 Tenets of Workmanship */}
         <div className="mt-24 pt-16 border-t border-white/10">
           <div className="max-w-2xl mb-12">
             <span className="text-xs font-mono-code uppercase tracking-wider text-accent">

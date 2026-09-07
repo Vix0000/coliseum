@@ -10,15 +10,16 @@ interface SeoProps {
 }
 
 export const SeoHead: React.FC<SeoProps> = ({
-  title = 'Coliseum Concrete & Interlock | Ottawa Concrete & Hardscape Craftsmen',
+  title,
   description = 'Ottawa\'s licensed and insured concrete and interlock contractor. Stamped concrete patios, concrete driveways, interlock walkways, and architectural hardscapes.',
   canonicalPath = '/',
   schema
 }) => {
   const COMPANY_INFO = useCompany();
+  const pageTitle = title || `${COMPANY_INFO.name} | Ottawa Concrete & Hardscape Craftsmen`;
   useEffect(() => {
     // Update title
-    document.title = title;
+    document.title = pageTitle;
 
     // Update meta description
     let metaDesc = document.querySelector('meta[name="description"]');
